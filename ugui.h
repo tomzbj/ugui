@@ -17,103 +17,129 @@
 #ifndef __UGUI_H
 #define __UGUI_H
 
-#include "system.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+  //#include "system.h"
 #include "ugui_config.h"
 
+  /* -------------------------------------------------------------------------------- */
+  /* -- µGUI FONTS                                                                 -- */
+  /* -- Source: http://www.mikrocontroller.net/user/show/benedikt                  -- */
+  /* -------------------------------------------------------------------------------- */
+  typedef enum
+  {
+    FONT_TYPE_1BPP,
+    FONT_TYPE_8BPP
+  } FONT_TYPE;
 
-/* -------------------------------------------------------------------------------- */
-/* -- µGUI FONTS                                                                 -- */
-/* -- Source: http://www.mikrocontroller.net/user/show/benedikt                  -- */
-/* -------------------------------------------------------------------------------- */
-typedef enum
-{
-	FONT_TYPE_1BPP,
-	FONT_TYPE_8BPP
-} FONT_TYPE;
-
-typedef struct
-{
-   unsigned char* p;
-   FONT_TYPE font_type;
-   UG_S16 char_width;
-   UG_S16 char_height;
-   UG_U16 start_char;
-   UG_U16 end_char;
-   UG_U8  *widths;
-} UG_FONT;
+  typedef struct
+  {
+    unsigned char* p;
+    FONT_TYPE font_type;
+    UG_S16 char_width;
+    UG_S16 char_height;
+    UG_U16 start_char;
+    UG_U16 end_char;
+    UG_U8 *widths;
+  } UG_FONT;
 
 #ifdef USE_FONT_4X6
-   extern const UG_FONT FONT_4X6;
+  extern const UG_FONT FONT_4X6;
 #endif
 #ifdef USE_FONT_5X8
-   extern const UG_FONT FONT_5X8;
+  extern const UG_FONT FONT_5X8;
 #endif
 #ifdef USE_FONT_5X12
-   extern const UG_FONT FONT_5X12;
+  extern const UG_FONT FONT_5X12;
 #endif
 #ifdef USE_FONT_6X8
-   extern const UG_FONT FONT_6X8;
+  extern const UG_FONT FONT_6X8;
 #endif
 #ifdef USE_FONT_6X10
-   extern const UG_FONT FONT_6X10;
+  extern const UG_FONT FONT_6X10;
+#endif
+#ifdef USE_FONT_6X12
+  extern const UG_FONT FONT_6X12;
+#endif
+#ifdef USE_FONT_6X12_SUN
+  extern const UG_FONT FONT_6X12;
+#endif
+#ifdef USE_FONT_8X16_SUN
+  extern const UG_FONT FONT_8X16;
+#endif
+#ifdef USE_FONT_8X16
+  extern const UG_FONT FONT_8X16;
 #endif
 #ifdef USE_FONT_7X12
-   extern const UG_FONT FONT_7X12;
+  extern const UG_FONT FONT_7X12;
 #endif
 #ifdef USE_FONT_8X8
-   extern const UG_FONT FONT_8X8;
+  extern const UG_FONT FONT_8X8;
 #endif
 #ifdef USE_FONT_8X12
-   extern const UG_FONT FONT_8X12;
+  extern const UG_FONT FONT_8X12;
 #endif
 #ifdef USE_FONT_8X12_CYRILLIC
-   extern const UG_FONT FONT_8X12;
+  extern const UG_FONT FONT_8X12;
 #endif
 #ifdef USE_FONT_8X14
-   extern const UG_FONT FONT_8X14;
+  extern const UG_FONT FONT_8X14;
 #endif
 #ifdef USE_FONT_10X16
-   extern const UG_FONT FONT_10X16;
+  extern const UG_FONT FONT_10X16;
 #endif
 #ifdef USE_FONT_12X16
-   extern const UG_FONT FONT_12X16;
+  extern const UG_FONT FONT_12X16;
 #endif
 #ifdef USE_FONT_12X20
-   extern const UG_FONT FONT_12X20;
+  extern const UG_FONT FONT_12X20;
 #endif
 #ifdef USE_FONT_16X26
-   extern const UG_FONT FONT_16X26;
+  extern const UG_FONT FONT_16X26;
 #endif
 #ifdef USE_FONT_22X36
-   extern const UG_FONT FONT_22X36;
+  extern const UG_FONT FONT_22X36;
 #endif
 #ifdef USE_FONT_24X40
-   extern const UG_FONT FONT_24X40;
+  extern const UG_FONT FONT_24X40;
 #endif
 #ifdef USE_FONT_32X53
-   extern const UG_FONT FONT_32X53;
+  extern const UG_FONT FONT_32X53;
+#endif
+#ifdef USE_FONT_16X32
+  extern const UG_FONT FONT_16X32;
+#endif
+#ifdef USE_FONT_16X32_SUN
+  extern const UG_FONT FONT_16X32_SUN;
 #endif
 
-/* -------------------------------------------------------------------------------- */
-/* -- TYPEDEFS                                                                   -- */
-/* -------------------------------------------------------------------------------- */
-typedef struct S_OBJECT                               UG_OBJECT;
-typedef struct S_WINDOW                               UG_WINDOW;
-typedef UG_S8                                         UG_RESULT;
+#ifdef USE_FONT_16X37
+  extern const UG_FONT FONT_16X37;
+#endif
+
+
+  /* -------------------------------------------------------------------------------- */
+  /* -- TYPEDEFS                                                                   -- */
+  /* -------------------------------------------------------------------------------- */
+  typedef struct S_OBJECT UG_OBJECT;
+  typedef struct S_WINDOW UG_WINDOW;
+  typedef UG_S8 UG_RESULT;
 #ifdef USE_COLOR_RGB888
-typedef UG_U32                                        UG_COLOR;
+  typedef UG_U32 UG_COLOR;
 #endif
 #ifdef USE_COLOR_RGB565
-typedef UG_U16                                        UG_COLOR;
+  typedef UG_U16 UG_COLOR;
 #endif
-/* -------------------------------------------------------------------------------- */
-/* -- DEFINES                                                                    -- */
-/* -------------------------------------------------------------------------------- */
+  /* -------------------------------------------------------------------------------- */
+  /* -- DEFINES                                                                    -- */
+  /* -------------------------------------------------------------------------------- */
 #ifndef NULL
-   #define NULL ((void*) 0)
+#define NULL ((void*) 0)
 #endif
 
-/* Alignments */
+  /* Alignments */
 #define ALIGN_H_LEFT                                  (1<<0)
 #define ALIGN_H_CENTER                                (1<<1)
 #define ALIGN_H_RIGHT                                 (1<<2)
@@ -130,7 +156,7 @@ typedef UG_U16                                        UG_COLOR;
 #define ALIGN_TOP_CENTER                              (ALIGN_V_TOP|ALIGN_H_CENTER)
 #define ALIGN_TOP_LEFT                                (ALIGN_V_TOP|ALIGN_H_LEFT)
 
-/* Default IDs */
+  /* Default IDs */
 #define OBJ_ID_0                                      0
 #define OBJ_ID_1                                      1
 #define OBJ_ID_2                                      2
@@ -152,48 +178,48 @@ typedef UG_U16                                        UG_COLOR;
 #define OBJ_ID_18                                     18
 #define OBJ_ID_19                                     19
 
-/* -------------------------------------------------------------------------------- */
-/* -- FUNCTION RESULTS                                                           -- */
-/* -------------------------------------------------------------------------------- */
+  /* -------------------------------------------------------------------------------- */
+  /* -- FUNCTION RESULTS                                                           -- */
+  /* -------------------------------------------------------------------------------- */
 #define UG_RESULT_FAIL                               -1
 #define UG_RESULT_OK                                  0
 
-/* -------------------------------------------------------------------------------- */
-/* -- UNIVERSAL STRUCTURES                                                       -- */
-/* -------------------------------------------------------------------------------- */
-/* Area structure */
-typedef struct
-{
-   UG_S16 xs;
-   UG_S16 ys;
-   UG_S16 xe;
-   UG_S16 ye;
-} UG_AREA;
+  /* -------------------------------------------------------------------------------- */
+  /* -- UNIVERSAL STRUCTURES                                                       -- */
+  /* -------------------------------------------------------------------------------- */
+  /* Area structure */
+  typedef struct
+  {
+    UG_S16 xs;
+    UG_S16 ys;
+    UG_S16 xe;
+    UG_S16 ye;
+  } UG_AREA;
 
-/* Text structure */
-typedef struct
-{
-   char* str;
-   const UG_FONT* font;
-   UG_AREA a;
-   UG_COLOR fc;
-   UG_COLOR bc;
-   UG_U8 align;
-   UG_S16 h_space;
-   UG_S16 v_space;
-} UG_TEXT;
+  /* Text structure */
+  typedef struct
+  {
+    char* str;
+    const UG_FONT* font;
+    UG_AREA a;
+    UG_COLOR fc;
+    UG_COLOR bc;
+    UG_U8 align;
+    UG_S16 h_space;
+    UG_S16 v_space;
+  } UG_TEXT;
 
-/* -------------------------------------------------------------------------------- */
-/* -- BITMAP                                                                     -- */
-/* -------------------------------------------------------------------------------- */
-typedef struct
-{
-   void* p;
-   UG_U16 width;
-   UG_U16 height;
-   UG_U8 bpp;
-   UG_U8 colors;
-} UG_BMP;
+  /* -------------------------------------------------------------------------------- */
+  /* -- BITMAP                                                                     -- */
+  /* -------------------------------------------------------------------------------- */
+  typedef struct
+  {
+    void* p;
+    UG_U16 width;
+    UG_U16 height;
+    UG_U8 bpp;
+    UG_U8 colors;
+  } UG_BMP;
 
 #define BMP_BPP_1                                     (1<<0)
 #define BMP_BPP_2                                     (1<<1)
@@ -205,64 +231,63 @@ typedef struct
 #define BMP_RGB565                                    (1<<1)
 #define BMP_RGB555                                    (1<<2)
 
-/* -------------------------------------------------------------------------------- */
-/* -- MESSAGE                                                                    -- */
-/* -------------------------------------------------------------------------------- */
-/* Message structure */
-typedef struct
-{
-   UG_U8 type;
-   UG_U8 id;
-   UG_U8 sub_id;
-   UG_U8 event;
-   void* src;
-} UG_MESSAGE;
+  /* -------------------------------------------------------------------------------- */
+  /* -- MESSAGE                                                                    -- */
+  /* -------------------------------------------------------------------------------- */
+  /* Message structure */
+  typedef struct
+  {
+    UG_U8 type;
+    UG_U8 id;
+    UG_U8 sub_id;
+    UG_U8 event;
+    void* src;
+  } UG_MESSAGE;
 
-/* Message types */
+  /* Message types */
 #define MSG_TYPE_NONE                                 0
 #define MSG_TYPE_WINDOW                               1
 #define MSG_TYPE_OBJECT                               2
 
-/* -------------------------------------------------------------------------------- */
-/* -- TOUCH                                                                      -- */
-/* -------------------------------------------------------------------------------- */
-/* Touch structure */
-typedef struct
-{
-   UG_U8 state;
-   UG_S16 xp;
-   UG_S16 yp;
-} UG_TOUCH;
-
+  /* -------------------------------------------------------------------------------- */
+  /* -- TOUCH                                                                      -- */
+  /* -------------------------------------------------------------------------------- */
+  /* Touch structure */
+  typedef struct
+  {
+    UG_U8 state;
+    UG_S16 xp;
+    UG_S16 yp;
+  } UG_TOUCH;
 
 #define TOUCH_STATE_PRESSED                           1
 #define TOUCH_STATE_RELEASED                          0
 
-/* -------------------------------------------------------------------------------- */
-/* -- OBJECTS                                                                    -- */
-/* -------------------------------------------------------------------------------- */
-/* Object structure */
-struct S_OBJECT
-{
-   UG_U8 state;                              /* object state                               */
-   UG_U8 touch_state;                        /* object touch state                         */
-   void (*update) (UG_WINDOW*,UG_OBJECT*);   /* pointer to object-specific update function */
-   UG_AREA a_abs;                            /* absolute area of the object                */
-   UG_AREA a_rel;                            /* relative area of the object                */
-   UG_U8 type;                               /* object type                                */
-   UG_U8 id;                                 /* object ID                                  */
-   UG_U8 event;                              /* object-specific events                     */
-   void* data;                               /* pointer to object-specific data            */
-};
+  /* -------------------------------------------------------------------------------- */
+  /* -- OBJECTS                                                                    -- */
+  /* -------------------------------------------------------------------------------- */
+  /* Object structure */
+  struct S_OBJECT
+  {
+    UG_U8 state; /* object state                               */
+    UG_U8 touch_state; /* object touch state                         */
+    void (*update)(UG_WINDOW*, UG_OBJECT*); /* pointer to object-specific update function */
+    UG_AREA a_abs; /* absolute area of the object                */
+    UG_AREA a_rel; /* relative area of the object                */
+    UG_U8 type; /* object type                                */
+    UG_U8 id; /* object ID                                  */
+    UG_U8 event; /* object-specific events                     */
+    void* data; /* pointer to object-specific data            */
+  };
 
-/* Currently supported objects */
+  /* Currently supported objects */
 #define OBJ_TYPE_NONE                                 0
 #define OBJ_TYPE_BUTTON                               1
 #define OBJ_TYPE_TEXTBOX                              2
 #define OBJ_TYPE_IMAGE                                3
 #define OBJ_TYPE_CHECKBOX                             4
 
-/* Standard object events */
+  /* Standard object events */
 #define OBJ_EVENT_NONE                                0
 #define OBJ_EVENT_CLICKED                             1
 #ifdef USE_PRERENDER_EVENT
@@ -274,8 +299,7 @@ struct S_OBJECT
 #define OBJ_EVENT_PRESSED                             4
 #define OBJ_EVENT_RELEASED                            5
 
-
-/* Object states */
+  /* Object states */
 #define OBJ_STATE_FREE                                (1<<0)
 #define OBJ_STATE_VALID                               (1<<1)
 #define OBJ_STATE_BUSY                                (1<<2)
@@ -286,7 +310,7 @@ struct S_OBJECT
 #define OBJ_STATE_TOUCH_ENABLE                        (1<<7)
 #define OBJ_STATE_INIT                                (OBJ_STATE_FREE | OBJ_STATE_VALID)
 
-/* Object touch states */
+  /* Object touch states */
 #define OBJ_TOUCH_STATE_CHANGED                       (1<<0)
 #define OBJ_TOUCH_STATE_PRESSED_ON_OBJECT             (1<<1)
 #define OBJ_TOUCH_STATE_PRESSED_OUTSIDE_OBJECT        (1<<2)
@@ -297,42 +321,42 @@ struct S_OBJECT
 #define OBJ_TOUCH_STATE_CLICK_ON_OBJECT               (1<<7)
 #define OBJ_TOUCH_STATE_INIT                          0
 
-/* -------------------------------------------------------------------------------- */
-/* -- WINDOW                                                                     -- */
-/* -------------------------------------------------------------------------------- */
-/* Title structure */
-typedef struct
-{
-   char* str;
-   const UG_FONT* font;
-   UG_S8 h_space;
-   UG_S8 v_space;
-   UG_U8 align;
-   UG_COLOR fc;
-   UG_COLOR bc;
-   UG_COLOR ifc;
-   UG_COLOR ibc;
-   UG_U8 height;
-} UG_TITLE;
+  /* -------------------------------------------------------------------------------- */
+  /* -- WINDOW                                                                     -- */
+  /* -------------------------------------------------------------------------------- */
+  /* Title structure */
+  typedef struct
+  {
+    char* str;
+    const UG_FONT* font;
+    UG_S8 h_space;
+    UG_S8 v_space;
+    UG_U8 align;
+    UG_COLOR fc;
+    UG_COLOR bc;
+    UG_COLOR ifc;
+    UG_COLOR ibc;
+    UG_U8 height;
+  } UG_TITLE;
 
-/* Window structure */
-struct S_WINDOW
-{
-   UG_U8 objcnt;
-   UG_OBJECT* objlst;
-   UG_U8 state;
-   UG_COLOR fc;
-   UG_COLOR bc;
-   UG_S16 xs;
-   UG_S16 ys;
-   UG_S16 xe;
-   UG_S16 ye;
-   UG_U8 style;
-   UG_TITLE title;
-   void (*cb)( UG_MESSAGE* );
-};
+  /* Window structure */
+  struct S_WINDOW
+  {
+    UG_U8 objcnt;
+    UG_OBJECT* objlst;
+    UG_U8 state;
+    UG_COLOR fc;
+    UG_COLOR bc;
+    UG_S16 xs;
+    UG_S16 ys;
+    UG_S16 xe;
+    UG_S16 ye;
+    UG_U8 style;
+    UG_TITLE title;
+    void (*cb)(UG_MESSAGE*);
+  };
 
-/* Window states */
+  /* Window states */
 #define WND_STATE_FREE                                (1<<0)
 #define WND_STATE_VALID                               (1<<1)
 #define WND_STATE_BUSY                                (1<<2)
@@ -341,32 +365,32 @@ struct S_WINDOW
 #define WND_STATE_UPDATE                              (1<<5)
 #define WND_STATE_REDRAW_TITLE                        (1<<6)
 
-/* Window styles */
+  /* Window styles */
 #define WND_STYLE_2D                                  (0<<0)
 #define WND_STYLE_3D                                  (1<<0)
 #define WND_STYLE_HIDE_TITLE                          (0<<1)
 #define WND_STYLE_SHOW_TITLE                          (1<<1)
 
-/* -------------------------------------------------------------------------------- */
-/* -- BUTTON OBJECT                                                              -- */
-/* -------------------------------------------------------------------------------- */
-/* Button structure */
-typedef struct
-{
-   UG_U8 state;
-   UG_U8 style;
-   UG_COLOR fc;
-   UG_COLOR bc;
-   UG_COLOR afc;
-   UG_COLOR abc;
-   const UG_FONT* font;
-   UG_U8 align;
-   UG_S8 h_space;
-   UG_S8 v_space;
-   char* str;
-}UG_BUTTON;
+  /* -------------------------------------------------------------------------------- */
+  /* -- BUTTON OBJECT                                                              -- */
+  /* -------------------------------------------------------------------------------- */
+  /* Button structure */
+  typedef struct
+  {
+    UG_U8 state;
+    UG_U8 style;
+    UG_COLOR fc;
+    UG_COLOR bc;
+    UG_COLOR afc;
+    UG_COLOR abc;
+    const UG_FONT* font;
+    UG_U8 align;
+    UG_S8 h_space;
+    UG_S8 v_space;
+    char* str;
+  } UG_BUTTON;
 
-/* Default button IDs */
+  /* Default button IDs */
 #define BTN_ID_0                                      OBJ_ID_0
 #define BTN_ID_1                                      OBJ_ID_1
 #define BTN_ID_2                                      OBJ_ID_2
@@ -388,12 +412,12 @@ typedef struct
 #define BTN_ID_18                                     OBJ_ID_18
 #define BTN_ID_19                                     OBJ_ID_19
 
-/* Button states */
+  /* Button states */
 #define BTN_STATE_RELEASED                            (0<<0)
 #define BTN_STATE_PRESSED                             (1<<0)
 #define BTN_STATE_ALWAYS_REDRAW                       (1<<1)
 
-/* Button style */
+  /* Button style */
 #define BTN_STYLE_2D                                  (0<<0)
 #define BTN_STYLE_3D                                  (1<<0)
 #define BTN_STYLE_TOGGLE_COLORS                       (1<<1)
@@ -401,30 +425,30 @@ typedef struct
 #define BTN_STYLE_NO_BORDERS                          (1<<3)
 #define BTN_STYLE_NO_FILL                             (1<<4)
 
-/* Button events */
+  /* Button events */
 #define BTN_EVENT_CLICKED                             OBJ_EVENT_CLICKED
 
-/* -------------------------------------------------------------------------------- */
-/* -- CHECKBOX OBJECT                                                            -- */
-/* -------------------------------------------------------------------------------- */
-/* Checkbox structure */
-typedef struct
-{
-   UG_U8 state;
-   UG_U8 style;
-   UG_COLOR fc;
-   UG_COLOR bc;
-   UG_COLOR afc;
-   UG_COLOR abc;
-   const UG_FONT* font;
-   UG_U8 align;
-   UG_S8 h_space;
-   UG_S8 v_space;
-   char* str;
-   UG_U8 checked;
-}UG_CHECKBOX;
+  /* -------------------------------------------------------------------------------- */
+  /* -- CHECKBOX OBJECT                                                            -- */
+  /* -------------------------------------------------------------------------------- */
+  /* Checkbox structure */
+  typedef struct
+  {
+    UG_U8 state;
+    UG_U8 style;
+    UG_COLOR fc;
+    UG_COLOR bc;
+    UG_COLOR afc;
+    UG_COLOR abc;
+    const UG_FONT* font;
+    UG_U8 align;
+    UG_S8 h_space;
+    UG_S8 v_space;
+    char* str;
+    UG_U8 checked;
+  } UG_CHECKBOX;
 
-/* Default checkbox IDs */
+  /* Default checkbox IDs */
 #define CHB_ID_0                                      OBJ_ID_0
 #define CHB_ID_1                                      OBJ_ID_1
 #define CHB_ID_2                                      OBJ_ID_2
@@ -446,12 +470,12 @@ typedef struct
 #define CHB_ID_18                                     OBJ_ID_18
 #define CHB_ID_19                                     OBJ_ID_19
 
-/* Checkbox states */
+  /* Checkbox states */
 #define CHB_STATE_RELEASED                            (0<<0)
 #define CHB_STATE_PRESSED                             (1<<0)
 #define CHB_STATE_ALWAYS_REDRAW                       (1<<1)
 
-/* Checkbox style */
+  /* Checkbox style */
 #define CHB_STYLE_2D                                  (0<<0)
 #define CHB_STYLE_3D                                  (1<<0)
 #define CHB_STYLE_TOGGLE_COLORS                       (1<<1)
@@ -459,27 +483,26 @@ typedef struct
 #define CHB_STYLE_NO_BORDERS                          (1<<3)
 #define CHB_STYLE_NO_FILL                             (1<<4)
 
-/* Checkbox events */
+  /* Checkbox events */
 #define CHB_EVENT_CLICKED                             OBJ_EVENT_CLICKED
 
+  /* -------------------------------------------------------------------------------- */
+  /* -- TEXTBOX OBJECT                                                             -- */
+  /* -------------------------------------------------------------------------------- */
+  /* Textbox structure */
+  typedef struct
+  {
+    char* str;
+    const UG_FONT* font;
+    UG_U8 style;
+    UG_COLOR fc;
+    UG_COLOR bc;
+    UG_U8 align;
+    UG_S8 h_space;
+    UG_S8 v_space;
+  } UG_TEXTBOX;
 
-/* -------------------------------------------------------------------------------- */
-/* -- TEXTBOX OBJECT                                                             -- */
-/* -------------------------------------------------------------------------------- */
-/* Textbox structure */
-typedef struct
-{
-   char* str;
-   const UG_FONT* font;
-   UG_U8 style;
-   UG_COLOR fc;
-   UG_COLOR bc;
-   UG_U8 align;
-   UG_S8 h_space;
-   UG_S8 v_space;
-} UG_TEXTBOX;
-
-/* Default textbox IDs */
+  /* Default textbox IDs */
 #define TXB_ID_0                                      OBJ_ID_0
 #define TXB_ID_1                                      OBJ_ID_1
 #define TXB_ID_2                                      OBJ_ID_2
@@ -501,17 +524,17 @@ typedef struct
 #define TXB_ID_18                                     OBJ_ID_18
 #define TXB_ID_19                                     OBJ_ID_19
 
-/* -------------------------------------------------------------------------------- */
-/* -- IMAGE OBJECT                                                               -- */
-/* -------------------------------------------------------------------------------- */
-/* Image structure */
-typedef struct
-{
-   void* img;
-   UG_U8 type;
-} UG_IMAGE;
+  /* -------------------------------------------------------------------------------- */
+  /* -- IMAGE OBJECT                                                               -- */
+  /* -------------------------------------------------------------------------------- */
+  /* Image structure */
+  typedef struct
+  {
+    void* img;
+    UG_U8 type;
+  } UG_IMAGE;
 
-/* Default image IDs */
+  /* Default image IDs */
 #define IMG_ID_0                                      OBJ_ID_0
 #define IMG_ID_1                                      OBJ_ID_1
 #define IMG_ID_2                                      OBJ_ID_2
@@ -533,41 +556,41 @@ typedef struct
 #define IMG_ID_18                                     OBJ_ID_18
 #define IMG_ID_19                                     OBJ_ID_19
 
-/* Image types */
+  /* Image types */
 #define IMG_TYPE_BMP                                  (1<<0)
 
-/* -------------------------------------------------------------------------------- */
-/* -- µGUI DRIVER                                                                -- */
-/* -------------------------------------------------------------------------------- */
-typedef struct
-{
-  void* driver;
-  UG_U8 state;
-} UG_DRIVER;
+  /* -------------------------------------------------------------------------------- */
+  /* -- µGUI DRIVER                                                                -- */
+  /* -------------------------------------------------------------------------------- */
+  typedef struct
+  {
+    void* driver;
+    UG_U8 state;
+  } UG_DRIVER;
 
 #define DRIVER_REGISTERED                             (1<<0)
 #define DRIVER_ENABLED                                (1<<1)
 
-/* Supported drivers */
+  /* Supported drivers */
 #define NUMBER_OF_DRIVERS                             3
 #define DRIVER_DRAW_LINE                              0
 #define DRIVER_FILL_FRAME                             1
 #define DRIVER_FILL_AREA                              2
 
-/* -------------------------------------------------------------------------------- */
-/* -- µGUI CORE STRUCTURE                                                        -- */
-/* -------------------------------------------------------------------------------- */
-typedef struct
-{
-   void (*pset)(UG_S16,UG_S16,UG_COLOR);
-   UG_S16 x_dim;
-   UG_S16 y_dim;
-   UG_TOUCH touch;
-   UG_WINDOW* next_window;
-   UG_WINDOW* active_window;
-   UG_WINDOW* last_window;
-   struct
-   {
+  /* -------------------------------------------------------------------------------- */
+  /* -- µGUI CORE STRUCTURE                                                        -- */
+  /* -------------------------------------------------------------------------------- */
+  typedef struct
+  {
+    void (*pset)(UG_S16, UG_S16, UG_COLOR);
+    UG_S16 x_dim;
+    UG_S16 y_dim;
+    UG_TOUCH touch;
+    UG_WINDOW* next_window;
+    UG_WINDOW* active_window;
+    UG_WINDOW* last_window;
+    struct
+    {
       UG_S16 x_pos;
       UG_S16 y_pos;
       UG_S16 x_start;
@@ -576,23 +599,23 @@ typedef struct
       UG_S16 y_end;
       UG_COLOR fore_color;
       UG_COLOR back_color;
-   } console;
-   UG_FONT font;
-   UG_S8 char_h_space;
-   UG_S8 char_v_space;
-   UG_COLOR fore_color;
-   UG_COLOR back_color;
-   UG_COLOR desktop_color;
-   UG_U8 state;
-   UG_DRIVER driver[NUMBER_OF_DRIVERS];
-} UG_GUI;
+    } console;
+    UG_FONT font;
+    UG_S8 char_h_space;
+    UG_S8 char_v_space;
+    UG_COLOR fore_color;
+    UG_COLOR back_color;
+    UG_COLOR desktop_color;
+    UG_U8 state;
+    UG_DRIVER driver[NUMBER_OF_DRIVERS];
+  } UG_GUI;
 
 #define UG_SATUS_WAIT_FOR_UPDATE                      (1<<0)
 
-/* -------------------------------------------------------------------------------- */
-/* -- µGUI COLORS                                                                -- */
-/* -- Source: http://www.rapidtables.com/web/color/RGB_Color.htm                 -- */
-/* -------------------------------------------------------------------------------- */
+  /* -------------------------------------------------------------------------------- */
+  /* -- µGUI COLORS                                                                -- */
+  /* -- Source: http://www.rapidtables.com/web/color/RGB_Color.htm                 -- */
+  /* -------------------------------------------------------------------------------- */
 #ifdef USE_COLOR_RGB565
 #define C_MAROON                       0x8000
 #define C_DARK_RED                     0x8800
@@ -877,176 +900,191 @@ typedef struct
 #define  C_WHITE                      0xFFFFFF
 #endif
 
-/* -------------------------------------------------------------------------------- */
-/* -- PROTOTYPES                                                                 -- */
-/* -------------------------------------------------------------------------------- */
-/* Classic functions */
-UG_S16 UG_Init( UG_GUI* g, void (*p)(UG_S16,UG_S16,UG_COLOR), UG_S16 x, UG_S16 y );
-UG_S16 UG_SelectGUI( UG_GUI* g );
-void UG_FontSelect( const UG_FONT* font );
-void UG_FillScreen( UG_COLOR c );
-void UG_FillFrame( UG_S16 x1, UG_S16 y1, UG_S16 x2, UG_S16 y2, UG_COLOR c );
-void UG_FillRoundFrame( UG_S16 x1, UG_S16 y1, UG_S16 x2, UG_S16 y2, UG_S16 r, UG_COLOR c );
-void UG_DrawMesh( UG_S16 x1, UG_S16 y1, UG_S16 x2, UG_S16 y2, UG_COLOR c );
-void UG_DrawFrame( UG_S16 x1, UG_S16 y1, UG_S16 x2, UG_S16 y2, UG_COLOR c );
-void UG_DrawRoundFrame( UG_S16 x1, UG_S16 y1, UG_S16 x2, UG_S16 y2, UG_S16 r, UG_COLOR c );
-void UG_DrawPixel( UG_S16 x0, UG_S16 y0, UG_COLOR c );
-void UG_DrawCircle( UG_S16 x0, UG_S16 y0, UG_S16 r, UG_COLOR c );
-void UG_FillCircle( UG_S16 x0, UG_S16 y0, UG_S16 r, UG_COLOR c );
-void UG_DrawArc( UG_S16 x0, UG_S16 y0, UG_S16 r, UG_U8 s, UG_COLOR c );
-void UG_DrawLine( UG_S16 x1, UG_S16 y1, UG_S16 x2, UG_S16 y2, UG_COLOR c );
-void UG_PutString( UG_S16 x, UG_S16 y, char* str );
-void UG_PutChar( char chr, UG_S16 x, UG_S16 y, UG_COLOR fc, UG_COLOR bc );
-void UG_ConsolePutString( char* str );
-void UG_ConsoleSetArea( UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye );
-void UG_ConsoleSetForecolor( UG_COLOR c );
-void UG_ConsoleSetBackcolor( UG_COLOR c );
-void UG_SetForecolor( UG_COLOR c );
-void UG_SetBackcolor( UG_COLOR c );
-UG_S16 UG_GetXDim( void );
-UG_S16 UG_GetYDim( void );
-void UG_FontSetHSpace( UG_U16 s );
-void UG_FontSetVSpace( UG_U16 s );
+  /* -------------------------------------------------------------------------------- */
+  /* -- PROTOTYPES                                                                 -- */
+  /* -------------------------------------------------------------------------------- */
+  /* Classic functions */
+  UG_S16 UG_Init(UG_GUI* g, void (*p)(UG_S16, UG_S16, UG_COLOR), UG_S16 x,
+      UG_S16 y);
+  UG_S16 UG_SelectGUI(UG_GUI* g);
+  void UG_FontSelect(const UG_FONT* font);
+  void UG_FillScreen(UG_COLOR c);
+  void UG_FillFrame(UG_S16 x1, UG_S16 y1, UG_S16 x2, UG_S16 y2, UG_COLOR c);
+  void UG_FillRoundFrame(UG_S16 x1, UG_S16 y1, UG_S16 x2, UG_S16 y2, UG_S16 r,
+      UG_COLOR c);
+  void UG_DrawMesh(UG_S16 x1, UG_S16 y1, UG_S16 x2, UG_S16 y2, UG_COLOR c);
+  void UG_DrawFrame(UG_S16 x1, UG_S16 y1, UG_S16 x2, UG_S16 y2, UG_COLOR c);
+  void UG_DrawRoundFrame(UG_S16 x1, UG_S16 y1, UG_S16 x2, UG_S16 y2, UG_S16 r,
+      UG_COLOR c);
+  void UG_DrawPixel(UG_S16 x0, UG_S16 y0, UG_COLOR c);
+  void UG_DrawCircle(UG_S16 x0, UG_S16 y0, UG_S16 r, UG_COLOR c);
+  void UG_FillCircle(UG_S16 x0, UG_S16 y0, UG_S16 r, UG_COLOR c);
+  void UG_DrawArc(UG_S16 x0, UG_S16 y0, UG_S16 r, UG_U8 s, UG_COLOR c);
+  void UG_DrawLine(UG_S16 x1, UG_S16 y1, UG_S16 x2, UG_S16 y2, UG_COLOR c);
+  void UG_PutString(UG_S16 x, UG_S16 y, char* str);
+  void UG_PutChar(char chr, UG_S16 x, UG_S16 y, UG_COLOR fc, UG_COLOR bc);
+  void UG_ConsolePutString(char* str);
+  void UG_ConsoleSetArea(UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye);
+  void UG_ConsoleSetForecolor(UG_COLOR c);
+  void UG_ConsoleSetBackcolor(UG_COLOR c);
+  void UG_SetForecolor(UG_COLOR c);
+  void UG_SetBackcolor(UG_COLOR c);
+  UG_S16 UG_GetXDim(void);
+  UG_S16 UG_GetYDim(void);
+  void UG_FontSetHSpace(UG_U16 s);
+  void UG_FontSetVSpace(UG_U16 s);
 
-/* Miscellaneous functions */
-void UG_WaitForUpdate( void );
-void UG_Update( void );
-void UG_DrawBMP( UG_S16 xp, UG_S16 yp, UG_BMP* bmp );
-void UG_TouchUpdate( UG_S16 xp, UG_S16 yp, UG_U8 state );
+  /* Miscellaneous functions */
+  void UG_WaitForUpdate(void);
+  void UG_Update(void);
+  void UG_DrawBMP(UG_S16 xp, UG_S16 yp, UG_BMP* bmp);
+  void UG_TouchUpdate(UG_S16 xp, UG_S16 yp, UG_U8 state);
 
-/* Driver functions */
-void UG_DriverRegister( UG_U8 type, void* driver );
-void UG_DriverEnable( UG_U8 type );
-void UG_DriverDisable( UG_U8 type );
+  /* Driver functions */
+  void UG_DriverRegister(UG_U8 type, void* driver);
+  void UG_DriverEnable(UG_U8 type);
+  void UG_DriverDisable(UG_U8 type);
 
-/* Window functions */
-UG_RESULT UG_WindowCreate( UG_WINDOW* wnd, UG_OBJECT* objlst, UG_U8 objcnt, void (*cb)( UG_MESSAGE* ) );
-UG_RESULT UG_WindowDelete( UG_WINDOW* wnd );
-UG_RESULT UG_WindowShow( UG_WINDOW* wnd );
-UG_RESULT UG_WindowHide( UG_WINDOW* wnd );
-UG_RESULT UG_WindowResize( UG_WINDOW* wnd, UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye );
-UG_RESULT UG_WindowAlert( UG_WINDOW* wnd );
-UG_RESULT UG_WindowSetForeColor( UG_WINDOW* wnd, UG_COLOR fc );
-UG_RESULT UG_WindowSetBackColor( UG_WINDOW* wnd, UG_COLOR bc );
-UG_RESULT UG_WindowSetTitleTextColor( UG_WINDOW* wnd, UG_COLOR c );
-UG_RESULT UG_WindowSetTitleColor( UG_WINDOW* wnd, UG_COLOR c );
-UG_RESULT UG_WindowSetTitleInactiveTextColor( UG_WINDOW* wnd, UG_COLOR c );
-UG_RESULT UG_WindowSetTitleInactiveColor( UG_WINDOW* wnd, UG_COLOR c );
-UG_RESULT UG_WindowSetTitleText( UG_WINDOW* wnd, char* str );
-UG_RESULT UG_WindowSetTitleTextFont( UG_WINDOW* wnd, const UG_FONT* font );
-UG_RESULT UG_WindowSetTitleTextHSpace( UG_WINDOW* wnd, UG_S8 hs );
-UG_RESULT UG_WindowSetTitleTextVSpace( UG_WINDOW* wnd, UG_S8 vs );
-UG_RESULT UG_WindowSetTitleTextAlignment( UG_WINDOW* wnd, UG_U8 align );
-UG_RESULT UG_WindowSetTitleHeight( UG_WINDOW* wnd, UG_U8 height );
-UG_RESULT UG_WindowSetXStart( UG_WINDOW* wnd, UG_S16 xs );
-UG_RESULT UG_WindowSetYStart( UG_WINDOW* wnd, UG_S16 ys );
-UG_RESULT UG_WindowSetXEnd( UG_WINDOW* wnd, UG_S16 xe );
-UG_RESULT UG_WindowSetYEnd( UG_WINDOW* wnd, UG_S16 ye );
-UG_RESULT UG_WindowSetStyle( UG_WINDOW* wnd, UG_U8 style );
-UG_COLOR UG_WindowGetForeColor( UG_WINDOW* wnd );
-UG_COLOR UG_WindowGetBackColor( UG_WINDOW* wnd );
-UG_COLOR UG_WindowGetTitleTextColor( UG_WINDOW* wnd );
-UG_COLOR UG_WindowGetTitleColor( UG_WINDOW* wnd );
-UG_COLOR UG_WindowGetTitleInactiveTextColor( UG_WINDOW* wnd );
-UG_COLOR UG_WindowGetTitleInactiveColor( UG_WINDOW* wnd );
-char* UG_WindowGetTitleText( UG_WINDOW* wnd );
-UG_FONT* UG_WindowGetTitleTextFont( UG_WINDOW* wnd );
-UG_S8 UG_WindowGetTitleTextHSpace( UG_WINDOW* wnd );
-UG_S8 UG_WindowGetTitleTextVSpace( UG_WINDOW* wnd );
-UG_U8 UG_WindowGetTitleTextAlignment( UG_WINDOW* wnd );
-UG_U8 UG_WindowGetTitleHeight( UG_WINDOW* wnd );
-UG_S16 UG_WindowGetXStart( UG_WINDOW* wnd );
-UG_S16 UG_WindowGetYStart( UG_WINDOW* wnd );
-UG_S16 UG_WindowGetXEnd( UG_WINDOW* wnd );
-UG_S16 UG_WindowGetYEnd( UG_WINDOW* wnd );
-UG_U8 UG_WindowGetStyle( UG_WINDOW* wnd );
-UG_RESULT UG_WindowGetArea( UG_WINDOW* wnd, UG_AREA* a );
-UG_S16 UG_WindowGetInnerWidth( UG_WINDOW* wnd );
-UG_S16 UG_WindowGetOuterWidth( UG_WINDOW* wnd );
-UG_S16 UG_WindowGetInnerHeight( UG_WINDOW* wnd );
-UG_S16 UG_WindowGetOuterHeight( UG_WINDOW* wnd );
+  /* Window functions */
+  UG_RESULT UG_WindowCreate(UG_WINDOW* wnd, UG_OBJECT* objlst, UG_U8 objcnt,
+      void (*cb)(UG_MESSAGE*));
+  UG_RESULT UG_WindowDelete(UG_WINDOW* wnd);
+  UG_RESULT UG_WindowShow(UG_WINDOW* wnd);
+  UG_RESULT UG_WindowHide(UG_WINDOW* wnd);
+  UG_RESULT UG_WindowResize(UG_WINDOW* wnd, UG_S16 xs, UG_S16 ys, UG_S16 xe,
+      UG_S16 ye);
+  UG_RESULT UG_WindowAlert(UG_WINDOW* wnd);
+  UG_RESULT UG_WindowSetForeColor(UG_WINDOW* wnd, UG_COLOR fc);
+  UG_RESULT UG_WindowSetBackColor(UG_WINDOW* wnd, UG_COLOR bc);
+  UG_RESULT UG_WindowSetTitleTextColor(UG_WINDOW* wnd, UG_COLOR c);
+  UG_RESULT UG_WindowSetTitleColor(UG_WINDOW* wnd, UG_COLOR c);
+  UG_RESULT UG_WindowSetTitleInactiveTextColor(UG_WINDOW* wnd, UG_COLOR c);
+  UG_RESULT UG_WindowSetTitleInactiveColor(UG_WINDOW* wnd, UG_COLOR c);
+  UG_RESULT UG_WindowSetTitleText(UG_WINDOW* wnd, char* str);
+  UG_RESULT UG_WindowSetTitleTextFont(UG_WINDOW* wnd, const UG_FONT* font);
+  UG_RESULT UG_WindowSetTitleTextHSpace(UG_WINDOW* wnd, UG_S8 hs);
+  UG_RESULT UG_WindowSetTitleTextVSpace(UG_WINDOW* wnd, UG_S8 vs);
+  UG_RESULT UG_WindowSetTitleTextAlignment(UG_WINDOW* wnd, UG_U8 align);
+  UG_RESULT UG_WindowSetTitleHeight(UG_WINDOW* wnd, UG_U8 height);
+  UG_RESULT UG_WindowSetXStart(UG_WINDOW* wnd, UG_S16 xs);
+  UG_RESULT UG_WindowSetYStart(UG_WINDOW* wnd, UG_S16 ys);
+  UG_RESULT UG_WindowSetXEnd(UG_WINDOW* wnd, UG_S16 xe);
+  UG_RESULT UG_WindowSetYEnd(UG_WINDOW* wnd, UG_S16 ye);
+  UG_RESULT UG_WindowSetStyle(UG_WINDOW* wnd, UG_U8 style);
+  UG_COLOR UG_WindowGetForeColor(UG_WINDOW* wnd);
+  UG_COLOR UG_WindowGetBackColor(UG_WINDOW* wnd);
+  UG_COLOR UG_WindowGetTitleTextColor(UG_WINDOW* wnd);
+  UG_COLOR UG_WindowGetTitleColor(UG_WINDOW* wnd);
+  UG_COLOR UG_WindowGetTitleInactiveTextColor(UG_WINDOW* wnd);
+  UG_COLOR UG_WindowGetTitleInactiveColor(UG_WINDOW* wnd);
+  char* UG_WindowGetTitleText(UG_WINDOW* wnd);
+  UG_FONT* UG_WindowGetTitleTextFont(UG_WINDOW* wnd);
+  UG_S8 UG_WindowGetTitleTextHSpace(UG_WINDOW* wnd);
+  UG_S8 UG_WindowGetTitleTextVSpace(UG_WINDOW* wnd);
+  UG_U8 UG_WindowGetTitleTextAlignment(UG_WINDOW* wnd);
+  UG_U8 UG_WindowGetTitleHeight(UG_WINDOW* wnd);
+  UG_S16 UG_WindowGetXStart(UG_WINDOW* wnd);
+  UG_S16 UG_WindowGetYStart(UG_WINDOW* wnd);
+  UG_S16 UG_WindowGetXEnd(UG_WINDOW* wnd);
+  UG_S16 UG_WindowGetYEnd(UG_WINDOW* wnd);
+  UG_U8 UG_WindowGetStyle(UG_WINDOW* wnd);
+  UG_RESULT UG_WindowGetArea(UG_WINDOW* wnd, UG_AREA* a);
+  UG_S16 UG_WindowGetInnerWidth(UG_WINDOW* wnd);
+  UG_S16 UG_WindowGetOuterWidth(UG_WINDOW* wnd);
+  UG_S16 UG_WindowGetInnerHeight(UG_WINDOW* wnd);
+  UG_S16 UG_WindowGetOuterHeight(UG_WINDOW* wnd);
 
-/* Button functions */
-UG_RESULT UG_ButtonCreate( UG_WINDOW* wnd, UG_BUTTON* btn, UG_U8 id, UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye );
-UG_RESULT UG_ButtonDelete( UG_WINDOW* wnd, UG_U8 id );
-UG_RESULT UG_ButtonShow( UG_WINDOW* wnd, UG_U8 id );
-UG_RESULT UG_ButtonHide( UG_WINDOW* wnd, UG_U8 id );
-UG_RESULT UG_ButtonSetForeColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR fc );
-UG_RESULT UG_ButtonSetBackColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR bc );
-UG_RESULT UG_ButtonSetAlternateForeColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR afc );
-UG_RESULT UG_ButtonSetAlternateBackColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR abc );
-UG_RESULT UG_ButtonSetText( UG_WINDOW* wnd, UG_U8 id, char* str );
-UG_RESULT UG_ButtonSetFont( UG_WINDOW* wnd, UG_U8 id, const UG_FONT* font );
-UG_RESULT UG_ButtonSetStyle( UG_WINDOW* wnd, UG_U8 id, UG_U8 style );
-UG_RESULT UG_ButtonSetHSpace( UG_WINDOW* wnd, UG_U8 id, UG_S8 hs );
-UG_RESULT UG_ButtonSetVSpace( UG_WINDOW* wnd, UG_U8 id, UG_S8 vs );
-UG_RESULT UG_ButtonSetAlignment( UG_WINDOW* wnd, UG_U8 id, UG_U8 align );
-UG_COLOR UG_ButtonGetForeColor( UG_WINDOW* wnd, UG_U8 id );
-UG_COLOR UG_ButtonGetBackColor( UG_WINDOW* wnd, UG_U8 id );
-UG_COLOR UG_ButtonGetAlternateForeColor( UG_WINDOW* wnd, UG_U8 id );
-UG_COLOR UG_ButtonGetAlternateBackColor( UG_WINDOW* wnd, UG_U8 id );
-char* UG_ButtonGetText( UG_WINDOW* wnd, UG_U8 id );
-UG_FONT* UG_ButtonGetFont( UG_WINDOW* wnd, UG_U8 id );
-UG_U8 UG_ButtonGetStyle( UG_WINDOW* wnd, UG_U8 id );
-UG_S8 UG_ButtonGetHSpace( UG_WINDOW* wnd, UG_U8 id );
-UG_S8 UG_ButtonGetVSpace( UG_WINDOW* wnd, UG_U8 id );
-UG_U8 UG_ButtonGetAlignment( UG_WINDOW* wnd, UG_U8 id );
+  /* Button functions */
+  UG_RESULT UG_ButtonCreate(UG_WINDOW* wnd, UG_BUTTON* btn, UG_U8 id, UG_S16 xs,
+      UG_S16 ys, UG_S16 xe, UG_S16 ye);
+  UG_RESULT UG_ButtonDelete(UG_WINDOW* wnd, UG_U8 id);
+  UG_RESULT UG_ButtonShow(UG_WINDOW* wnd, UG_U8 id);
+  UG_RESULT UG_ButtonHide(UG_WINDOW* wnd, UG_U8 id);
+  UG_RESULT UG_ButtonSetForeColor(UG_WINDOW* wnd, UG_U8 id, UG_COLOR fc);
+  UG_RESULT UG_ButtonSetBackColor(UG_WINDOW* wnd, UG_U8 id, UG_COLOR bc);
+  UG_RESULT UG_ButtonSetAlternateForeColor(UG_WINDOW* wnd, UG_U8 id,
+      UG_COLOR afc);
+  UG_RESULT UG_ButtonSetAlternateBackColor(UG_WINDOW* wnd, UG_U8 id,
+      UG_COLOR abc);
+  UG_RESULT UG_ButtonSetText(UG_WINDOW* wnd, UG_U8 id, char* str);
+  UG_RESULT UG_ButtonSetFont(UG_WINDOW* wnd, UG_U8 id, const UG_FONT* font);
+  UG_RESULT UG_ButtonSetStyle(UG_WINDOW* wnd, UG_U8 id, UG_U8 style);
+  UG_RESULT UG_ButtonSetHSpace(UG_WINDOW* wnd, UG_U8 id, UG_S8 hs);
+  UG_RESULT UG_ButtonSetVSpace(UG_WINDOW* wnd, UG_U8 id, UG_S8 vs);
+  UG_RESULT UG_ButtonSetAlignment(UG_WINDOW* wnd, UG_U8 id, UG_U8 align);
+  UG_COLOR UG_ButtonGetForeColor(UG_WINDOW* wnd, UG_U8 id);
+  UG_COLOR UG_ButtonGetBackColor(UG_WINDOW* wnd, UG_U8 id);
+  UG_COLOR UG_ButtonGetAlternateForeColor(UG_WINDOW* wnd, UG_U8 id);
+  UG_COLOR UG_ButtonGetAlternateBackColor(UG_WINDOW* wnd, UG_U8 id);
+  char* UG_ButtonGetText(UG_WINDOW* wnd, UG_U8 id);
+  UG_FONT* UG_ButtonGetFont(UG_WINDOW* wnd, UG_U8 id);
+  UG_U8 UG_ButtonGetStyle(UG_WINDOW* wnd, UG_U8 id);
+  UG_S8 UG_ButtonGetHSpace(UG_WINDOW* wnd, UG_U8 id);
+  UG_S8 UG_ButtonGetVSpace(UG_WINDOW* wnd, UG_U8 id);
+  UG_U8 UG_ButtonGetAlignment(UG_WINDOW* wnd, UG_U8 id);
 
-/* Checkbox functions */
-UG_RESULT UG_CheckboxCreate( UG_WINDOW* wnd, UG_CHECKBOX* btn, UG_U8 id, UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye );
-UG_RESULT UG_CheckboxDelete( UG_WINDOW* wnd, UG_U8 id );
-UG_RESULT UG_CheckboxShow( UG_WINDOW* wnd, UG_U8 id );
-UG_RESULT UG_CheckboxHide( UG_WINDOW* wnd, UG_U8 id );
-UG_RESULT UG_CheckboxSetCheched( UG_WINDOW* wnd, UG_U8 id, UG_U8 ch );
-UG_RESULT UG_CheckboxSetForeColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR fc );
-UG_RESULT UG_CheckboxSetBackColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR bc );
-UG_RESULT UG_CheckboxSetAlternateForeColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR afc );
-UG_RESULT UG_CheckboxSetAlternateBackColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR abc );
-UG_RESULT UG_CheckboxSetText( UG_WINDOW* wnd, UG_U8 id, char* str );
-UG_RESULT UG_CheckboxSetFont( UG_WINDOW* wnd, UG_U8 id, const UG_FONT* font );
-UG_RESULT UG_CheckboxSetStyle( UG_WINDOW* wnd, UG_U8 id, UG_U8 style );
-UG_RESULT UG_CheckboxSetHSpace( UG_WINDOW* wnd, UG_U8 id, UG_S8 hs );
-UG_RESULT UG_CheckboxSetVSpace( UG_WINDOW* wnd, UG_U8 id, UG_S8 vs );
-UG_RESULT UG_CheckboxSetAlignment( UG_WINDOW* wnd, UG_U8 id, UG_U8 align );
-UG_U8 UG_CheckboxGetChecked( UG_WINDOW* wnd, UG_U8 id );
-UG_COLOR UG_CheckboxGetForeColor( UG_WINDOW* wnd, UG_U8 id );
-UG_COLOR UG_CheckboxGetBackColor( UG_WINDOW* wnd, UG_U8 id );
-UG_COLOR UG_CheckboxGetAlternateForeColor( UG_WINDOW* wnd, UG_U8 id );
-UG_COLOR UG_CheckboxGetAlternateBackColor( UG_WINDOW* wnd, UG_U8 id );
-char* UG_CheckboxGetText( UG_WINDOW* wnd, UG_U8 id );
-UG_FONT* UG_CheckboxGetFont( UG_WINDOW* wnd, UG_U8 id );
-UG_U8 UG_CheckboxGetStyle( UG_WINDOW* wnd, UG_U8 id );
-UG_S8 UG_CheckboxGetHSpace( UG_WINDOW* wnd, UG_U8 id );
-UG_S8 UG_CheckboxGetVSpace( UG_WINDOW* wnd, UG_U8 id );
-UG_U8 UG_CheckboxGetAlignment( UG_WINDOW* wnd, UG_U8 id );
+  /* Checkbox functions */
+  UG_RESULT UG_CheckboxCreate(UG_WINDOW* wnd, UG_CHECKBOX* btn, UG_U8 id,
+      UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye);
+  UG_RESULT UG_CheckboxDelete(UG_WINDOW* wnd, UG_U8 id);
+  UG_RESULT UG_CheckboxShow(UG_WINDOW* wnd, UG_U8 id);
+  UG_RESULT UG_CheckboxHide(UG_WINDOW* wnd, UG_U8 id);
+  UG_RESULT UG_CheckboxSetCheched(UG_WINDOW* wnd, UG_U8 id, UG_U8 ch);
+  UG_RESULT UG_CheckboxSetForeColor(UG_WINDOW* wnd, UG_U8 id, UG_COLOR fc);
+  UG_RESULT UG_CheckboxSetBackColor(UG_WINDOW* wnd, UG_U8 id, UG_COLOR bc);
+  UG_RESULT UG_CheckboxSetAlternateForeColor(UG_WINDOW* wnd, UG_U8 id,
+      UG_COLOR afc);
+  UG_RESULT UG_CheckboxSetAlternateBackColor(UG_WINDOW* wnd, UG_U8 id,
+      UG_COLOR abc);
+  UG_RESULT UG_CheckboxSetText(UG_WINDOW* wnd, UG_U8 id, char* str);
+  UG_RESULT UG_CheckboxSetFont(UG_WINDOW* wnd, UG_U8 id, const UG_FONT* font);
+  UG_RESULT UG_CheckboxSetStyle(UG_WINDOW* wnd, UG_U8 id, UG_U8 style);
+  UG_RESULT UG_CheckboxSetHSpace(UG_WINDOW* wnd, UG_U8 id, UG_S8 hs);
+  UG_RESULT UG_CheckboxSetVSpace(UG_WINDOW* wnd, UG_U8 id, UG_S8 vs);
+  UG_RESULT UG_CheckboxSetAlignment(UG_WINDOW* wnd, UG_U8 id, UG_U8 align);
+  UG_U8 UG_CheckboxGetChecked(UG_WINDOW* wnd, UG_U8 id);
+  UG_COLOR UG_CheckboxGetForeColor(UG_WINDOW* wnd, UG_U8 id);
+  UG_COLOR UG_CheckboxGetBackColor(UG_WINDOW* wnd, UG_U8 id);
+  UG_COLOR UG_CheckboxGetAlternateForeColor(UG_WINDOW* wnd, UG_U8 id);
+  UG_COLOR UG_CheckboxGetAlternateBackColor(UG_WINDOW* wnd, UG_U8 id);
+  char* UG_CheckboxGetText(UG_WINDOW* wnd, UG_U8 id);
+  UG_FONT* UG_CheckboxGetFont(UG_WINDOW* wnd, UG_U8 id);
+  UG_U8 UG_CheckboxGetStyle(UG_WINDOW* wnd, UG_U8 id);
+  UG_S8 UG_CheckboxGetHSpace(UG_WINDOW* wnd, UG_U8 id);
+  UG_S8 UG_CheckboxGetVSpace(UG_WINDOW* wnd, UG_U8 id);
+  UG_U8 UG_CheckboxGetAlignment(UG_WINDOW* wnd, UG_U8 id);
 
-/* Textbox functions */
-UG_RESULT UG_TextboxCreate( UG_WINDOW* wnd, UG_TEXTBOX* txb, UG_U8 id, UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye );
-UG_RESULT UG_TextboxDelete( UG_WINDOW* wnd, UG_U8 id );
-UG_RESULT UG_TextboxShow( UG_WINDOW* wnd, UG_U8 id );
-UG_RESULT UG_TextboxHide( UG_WINDOW* wnd, UG_U8 id );
-UG_RESULT UG_TextboxSetForeColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR fc );
-UG_RESULT UG_TextboxSetBackColor( UG_WINDOW* wnd, UG_U8 id, UG_COLOR bc );
-UG_RESULT UG_TextboxSetText( UG_WINDOW* wnd, UG_U8 id, char* str );
-UG_RESULT UG_TextboxSetFont( UG_WINDOW* wnd, UG_U8 id, const UG_FONT* font );
-UG_RESULT UG_TextboxSetHSpace( UG_WINDOW* wnd, UG_U8 id, UG_S8 hs );
-UG_RESULT UG_TextboxSetVSpace( UG_WINDOW* wnd, UG_U8 id, UG_S8 vs );
-UG_RESULT UG_TextboxSetAlignment( UG_WINDOW* wnd, UG_U8 id, UG_U8 align );
-UG_COLOR UG_TextboxGetForeColor( UG_WINDOW* wnd, UG_U8 id );
-UG_COLOR UG_TextboxGetBackColor( UG_WINDOW* wnd, UG_U8 id );
-char* UG_TextboxGetText( UG_WINDOW* wnd, UG_U8 id );
-UG_FONT* UG_TextboxGetFont( UG_WINDOW* wnd, UG_U8 id );
-UG_S8 UG_TextboxGetHSpace( UG_WINDOW* wnd, UG_U8 id );
-UG_S8 UG_TextboxGetVSpace( UG_WINDOW* wnd, UG_U8 id );
-UG_U8 UG_TextboxGetAlignment( UG_WINDOW* wnd, UG_U8 id );
+  /* Textbox functions */
+  UG_RESULT UG_TextboxCreate(UG_WINDOW* wnd, UG_TEXTBOX* txb, UG_U8 id,
+      UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye);
+  UG_RESULT UG_TextboxDelete(UG_WINDOW* wnd, UG_U8 id);
+  UG_RESULT UG_TextboxShow(UG_WINDOW* wnd, UG_U8 id);
+  UG_RESULT UG_TextboxHide(UG_WINDOW* wnd, UG_U8 id);
+  UG_RESULT UG_TextboxSetForeColor(UG_WINDOW* wnd, UG_U8 id, UG_COLOR fc);
+  UG_RESULT UG_TextboxSetBackColor(UG_WINDOW* wnd, UG_U8 id, UG_COLOR bc);
+  UG_RESULT UG_TextboxSetText(UG_WINDOW* wnd, UG_U8 id, char* str);
+  UG_RESULT UG_TextboxSetFont(UG_WINDOW* wnd, UG_U8 id, const UG_FONT* font);
+  UG_RESULT UG_TextboxSetHSpace(UG_WINDOW* wnd, UG_U8 id, UG_S8 hs);
+  UG_RESULT UG_TextboxSetVSpace(UG_WINDOW* wnd, UG_U8 id, UG_S8 vs);
+  UG_RESULT UG_TextboxSetAlignment(UG_WINDOW* wnd, UG_U8 id, UG_U8 align);
+  UG_COLOR UG_TextboxGetForeColor(UG_WINDOW* wnd, UG_U8 id);
+  UG_COLOR UG_TextboxGetBackColor(UG_WINDOW* wnd, UG_U8 id);
+  char* UG_TextboxGetText(UG_WINDOW* wnd, UG_U8 id);
+  UG_FONT* UG_TextboxGetFont(UG_WINDOW* wnd, UG_U8 id);
+  UG_S8 UG_TextboxGetHSpace(UG_WINDOW* wnd, UG_U8 id);
+  UG_S8 UG_TextboxGetVSpace(UG_WINDOW* wnd, UG_U8 id);
+  UG_U8 UG_TextboxGetAlignment(UG_WINDOW* wnd, UG_U8 id);
 
-/* Image functions */
-UG_RESULT UG_ImageCreate( UG_WINDOW* wnd, UG_IMAGE* img, UG_U8 id, UG_S16 xs, UG_S16 ys, UG_S16 xe, UG_S16 ye );
-UG_RESULT UG_ImageDelete( UG_WINDOW* wnd, UG_U8 id );
-UG_RESULT UG_ImageShow( UG_WINDOW* wnd, UG_U8 id );
-UG_RESULT UG_ImageHide( UG_WINDOW* wnd, UG_U8 id );
-UG_RESULT UG_ImageSetBMP( UG_WINDOW* wnd, UG_U8 id, const UG_BMP* bmp );
+  /* Image functions */
+  UG_RESULT UG_ImageCreate(UG_WINDOW* wnd, UG_IMAGE* img, UG_U8 id, UG_S16 xs,
+      UG_S16 ys, UG_S16 xe, UG_S16 ye);
+  UG_RESULT UG_ImageDelete(UG_WINDOW* wnd, UG_U8 id);
+  UG_RESULT UG_ImageShow(UG_WINDOW* wnd, UG_U8 id);
+  UG_RESULT UG_ImageHide(UG_WINDOW* wnd, UG_U8 id);
+  UG_RESULT UG_ImageSetBMP(UG_WINDOW* wnd, UG_U8 id, const UG_BMP* bmp);
 
-
+#ifdef __cplusplus
+}
+#endif
 
 #endif
