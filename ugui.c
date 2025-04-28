@@ -6657,6 +6657,16 @@ const UG_FONT FONT_6X12 = {(unsigned char*)font_6x12, FONT_TYPE_1BPP, 6, 12, 0,
 const UG_FONT FONT_6X12 = {(unsigned char*)font_6x12, FONT_TYPE_1BPP, 6, 12, 32,
   128, NULL};
 #endif
+#ifdef USE_FONT_10X20
+extern __UG_FONT_DATA unsigned char font_10x20[];
+const UG_FONT FONT_10X20 = {(unsigned char*)font_10x20, FONT_TYPE_1BPP, 10, 20, 0, 255,
+NULL};
+#endif
+#ifdef USE_FONT_12X24
+extern __UG_FONT_DATA unsigned char font_12x24[];
+const UG_FONT FONT_12X24 = {(unsigned char*)font_12x24, FONT_TYPE_1BPP, 12, 24, 0, 255,
+NULL};
+#endif
 #ifdef USE_FONT_16X32
 extern __UG_FONT_DATA unsigned char font_16x32[];
 const UG_FONT FONT_16X32 = {(unsigned char*)font_16x32, FONT_TYPE_1BPP, 16, 32, 0, 255,
