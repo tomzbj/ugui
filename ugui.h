@@ -99,15 +99,6 @@ extern "C" {
 #ifdef USE_FONT_16X26
   extern const UG_FONT FONT_16X26;
 #endif
-#ifdef USE_FONT_22X36
-  extern const UG_FONT FONT_22X36;
-#endif
-#ifdef USE_FONT_24X40
-  extern const UG_FONT FONT_24X40;
-#endif
-#ifdef USE_FONT_32X53
-  extern const UG_FONT FONT_32X53;
-#endif
 #ifdef USE_FONT_10X20
   extern const UG_FONT FONT_10X20;
 #endif
